@@ -14,6 +14,6 @@ public interface CategoryRepository extends CrudRepository<CategoryEntity, Integ
 	
 	CategoryEntity findBycategoryName(String categoryName);
 
-	
+	CategoryEntity findBycategoryid(Integer categoryid);
 	
 }

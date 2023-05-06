@@ -3,11 +3,13 @@ package com.expense.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,4 +58,20 @@ public class CategoryController {
 		return ResponseEntity.ok(resp);
 	}
 
+	@DeleteMapping("/deleteCategoryById/{categoryid}")
+    public ResponseEntity<CustomResponse<CategoryEntity>> deleteCategoryByIdd(@PathVariable("categoryid") Integer categoryid)
+    {
+    	CategoryEntity categoryEntity = categoryRepository.findBycategoryid(categoryid);
+    	categoryRepository.deleteById(categoryid);
+    	
+    	CustomResponse<CategoryEntity> resp = new CustomResponse<>();
+    	
+    	resp.setData(categoryEntity);
+    	resp.setMsg("Category Deleted");
+    	return ResponseEntity.ok(resp);
+    	
+    }
+	
+	
+	
 }
